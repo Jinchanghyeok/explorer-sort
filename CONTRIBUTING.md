@@ -38,7 +38,7 @@ git clone https://github.com/YOUR-USERNAME/explorer-sort.git
 cd explorer-sort
 
 # Add upstream remote
-git remote add upstream https://github.com/ORIGINAL-OWNER/explorer-sort.git
+git remote add upstream https://github.com/Jinchanghyeok/explorer-sort.git
 
 # Install dependencies
 npm install
@@ -509,8 +509,8 @@ We plan to add:
 
 If you have questions:
 
-1. Check existing [Issues](https://github.com/yourusername/explorer-sort/issues)
-2. Check [Discussions](https://github.com/yourusername/explorer-sort/discussions)
+1. Check existing [Issues](https://github.com/Jinchanghyeok/explorer-sort/issues)
+2. Check [Discussions](https://github.com/Jinchanghyeok/explorer-sort/discussions)
 3. Open a new issue with the `question` label
 
 ## 🎉 Recognition

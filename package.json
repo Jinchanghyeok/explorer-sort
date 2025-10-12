@@ -2,13 +2,37 @@
   "name": "explorer-sort",
   "displayName": "%extension.displayName%",
   "description": "%extension.description%",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "publisher": "jinchanghyeok",
+  "author": {
+    "name": "Jin Chang",
+    "email": "jinchang9807@gmail.com"
+  },
+  "license": "MIT",
+  "icon": "image/icon.png",
   "engines": {
     "vscode": "^1.85.0"
   },
   "categories": [
     "Other"
   ],
+  "keywords": [
+    "explorer",
+    "sort",
+    "file management",
+    "folder",
+    "organize",
+    "drag drop",
+    "custom sort"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jinchanghyeok/explorer-sort.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Jinchanghyeok/explorer-sort/issues"
+  },
+  "homepage": "https://github.com/Jinchanghyeok/explorer-sort#readme",
   "activationEvents": [
     "onStartupFinished"
   ],

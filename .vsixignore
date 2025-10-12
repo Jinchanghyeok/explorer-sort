@@ -1,0 +1,12 @@
+.vscode/**
+.vscode-test/**
+src/**
+.gitignore
+.DS_Store
+tsconfig.json
+node_modules/**
+*.vsix
+**/*.map
+.git/**
+IMPLEMENTATION_CHECKLIST.md
+example-settings.json

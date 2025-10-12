@@ -54,7 +54,7 @@ Ideal for maintaining structured architectures like FSD (Feature-Sliced Design):
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/explorer-sort.git
+git clone https://github.com/Jinchanghyeok/explorer-sort.git
 cd explorer-sort
 ```
 
@@ -300,7 +300,7 @@ We welcome contributions! Here's how you can help:
 git clone https://github.com/YOUR-USERNAME/explorer-sort.git
 
 # Add upstream remote
-git remote add upstream https://github.com/ORIGINAL-OWNER/explorer-sort.git
+git remote add upstream https://github.com/Jinchanghyeok/explorer-sort.git
 
 # Create a feature branch
 git checkout -b feature/my-feature
@@ -336,7 +336,7 @@ This project is licensed under the MIT License - see below for details:
 ```
 MIT License
 
-Copyright (c) 2024 [Your Name]
+Copyright (c) 2024 Jin Chang
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -359,7 +359,7 @@ SOFTWARE.
 
 ## 👥 Authors
 
-- Jin Chang- *Initial work* -https://github.com/JinChangHyeok
+- Jin Chang - *Initial work* - [Jinchanghyeok](https://github.com/Jinchanghyeok)
 
 ## 🙏 Acknowledgments
 
