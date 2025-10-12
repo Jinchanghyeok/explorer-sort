@@ -16,7 +16,8 @@ export class I18n {
     console.log('❌ Using English messages'); // 디버그
   }
 
-    vscode.window.showInformationMessage(`현재 감지된 언어: ${vscode.env.language}`);
+    // 개발용 언어 감지 로그 (필요시 주석 해제)
+    // vscode.window.showInformationMessage(`현재 감지된 언어: ${vscode.env.language}`);
     this.messages = {
       'messages.noWorkspace': 'No workspace is opened',
       'messages.refreshed': 'File tree refreshed',

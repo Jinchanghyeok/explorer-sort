@@ -264,7 +264,7 @@ export function activate(context: vscode.ExtensionContext) {
       }
       
       if (priorities.length === 0) {
-        vscode.window.showWarningMessage('No priorities added. Rule not created.');
+        vscode.window.showWarningMessage(I18n.t('messages.noPrioritiesAdded'));
         return;
       }
       
