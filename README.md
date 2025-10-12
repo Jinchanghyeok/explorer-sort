@@ -6,6 +6,8 @@ A powerful VS Code extension that allows you to sort files and folders with cust
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 [![Sponsor](https://img.shields.io/badge/Sponsor-💖-ff69b4)](https://github.com/sponsors/Jinchanghyeok)
 
+![1760295266129](image/README/1760295266129.gif)
+
 ## ✨ Features
 
 ### 🎯 Core Capabilities
@@ -199,12 +201,14 @@ The new offset feature allows for fine-grained positioning relative to a referen
 ```
 
 **Offset Values:**
+
 - `0`: Position **before** the reference file
 - `-1`: Position **immediately after** the reference file
 - `> 0`: Position **N positions before** the reference file
 - `< -1`: Position **N positions after** the reference file
 
 **Key Points:**
+
 1. **Priority First**: Offset only applies within the same priority group - **cannot cross priority boundaries**
 2. **Reference File Required**: Must specify an exact filename (with extension for files)
 3. **Sequential Application**: Multiple offset rules are applied in the order they appear
@@ -388,6 +392,7 @@ If this extension makes your development workflow better, consider supporting it
 [![Sponsor on GitHub](https://img.shields.io/badge/Sponsor-💖-ff69b4?style=for-the-badge&logo=github)](https://github.com/sponsors/Jinchanghyeok)
 
 Your sponsorship helps me:
+
 - 🚀 Continue developing and maintaining this extension
 - 🐛 Fix bugs and add new features faster
 - 📚 Create better documentation and tutorials
