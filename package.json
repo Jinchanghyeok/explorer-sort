@@ -42,7 +42,7 @@
       "explorer": [
         {
           "id": "explorerSort",
-          "name": "EXPLORER_SORT",
+          "name": "%views.explorerSort.name%",
           "icon": "$(folder-opened)"
         }
       ]

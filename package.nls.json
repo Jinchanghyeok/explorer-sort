@@ -1,7 +1,9 @@
 {
   "extension.displayName": "Explorer Sort",
   "extension.description": "Custom rule-based file/folder sorting",
-  
+
+  "views.explorerSort.name": "Explorer Sort",
+
   "commands.refresh": "Refresh",
   "commands.collapseAll": "Collapse All",
   "commands.openFile": "Open File",

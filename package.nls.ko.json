@@ -1,7 +1,9 @@
 {
   "extension.displayName": "익스플로러 정렬",
   "extension.description": "커스텀 규칙 기반 파일/폴더 정렬",
-  
+
+  "views.explorerSort.name": "익스플로러 정렬",
+
   "commands.refresh": "새로고침",
   "commands.collapseAll": "모두 접기",
   "commands.openFile": "파일 열기",
