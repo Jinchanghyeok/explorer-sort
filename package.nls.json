@@ -55,6 +55,8 @@
   "prompts.pathPattern": "Path pattern (glob)",
   "prompts.conditionName": "Condition (e.g., name === 'app')",
   "prompts.priorityValue": "Priority value (higher = top)",
+  "prompts.referenceFile": "Reference file name (optional)",
+  "prompts.offsetValue": "Offset position (0: before, -1: after reference)",
   "prompts.addMoreConditions": "Add another condition?",
   
   "config.rules": "Sort rules configuration",

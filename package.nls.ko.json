@@ -55,6 +55,8 @@
   "prompts.pathPattern": "경로 패턴 (glob)",
   "prompts.conditionName": "조건 (예: name === 'app')",
   "prompts.priorityValue": "우선순위 값 (높을수록 위)",
+  "prompts.referenceFile": "기준 파일명 (선택사항)",
+  "prompts.offsetValue": "오프셋 위치 (0: 앞, -1: 기준파일 뒤)",
   "prompts.addMoreConditions": "조건을 더 추가하시겠습니까?",
   
   "config.rules": "정렬 규칙 설정",

@@ -15,6 +15,8 @@ export interface SortRule {
 export interface PriorityRule {
   condition: string; // 조건 표현식 (예: "name === 'app'")
   priority: number; // 우선순위 값 (높을수록 상위)
+  referenceFile?: string; // 기준이 되는 파일명 (선택적)
+  offset?: number; // 기준 파일 대비 오프셋 (-1: 뒤, 0: 앞, 숫자가 클수록 더 뒤)
 }
 
 /**

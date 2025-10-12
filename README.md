@@ -31,7 +31,12 @@ Ideal for maintaining structured architectures like FSD (Feature-Sliced Design):
         { "condition": "name === 'app'", "priority": 1000 },
         { "condition": "name === 'pages'", "priority": 999 },
         { "condition": "name === 'widgets'", "priority": 998 },
-        { "condition": "name === 'features'", "priority": 997 },
+        {
+          "condition": "name === 'features'",
+          "priority": 998,
+          "referenceFile": "widgets",
+          "offset": -1
+        },
         { "condition": "name === 'entities'", "priority": 996 },
         { "condition": "name === 'shared'", "priority": 995 }
       ]
@@ -39,6 +44,8 @@ Ideal for maintaining structured architectures like FSD (Feature-Sliced Design):
   ]
 }
 ```
+
+**Note**: In this example, `features` has the same priority as `widgets` (998) so the offset can position it after `widgets`. If `features` had priority 997, it would never appear above `entities` (priority 996) regardless of offset.
 
 ## 📦 Installation
 
@@ -92,8 +99,16 @@ Edit `.vscode/settings.json` in your workspace:
       "name": "My Custom Rule",
       "pathPattern": "**/components/**",
       "priorities": [
-        { "condition": "name.endsWith('.tsx')", "priority": 100 },
-        { "condition": "name.endsWith('.css')", "priority": 50 }
+        {
+          "condition": "name.endsWith('.tsx')",
+          "priority": 100,
+          "referenceFile": "index.tsx",
+          "offset": 0
+        },
+        {
+          "condition": "name.endsWith('.css')",
+          "priority": 50
+        }
       ]
     }
   ],
@@ -119,7 +134,9 @@ Edit `.vscode/settings.json` in your workspace:
   "priorities": [
     {
       "condition": "JavaScript expression",  // e.g., "name === 'app'"
-      "priority": 1000  // Higher number = higher priority
+      "priority": 1000,  // Higher number = higher priority
+      "referenceFile": "index.ts",  // Optional: Reference file name for offset positioning
+      "offset": 0  // Optional: Position relative to reference file (0: before, -1: after, etc.)
     }
   ]
 }
@@ -144,6 +161,54 @@ Available expressions for priority conditions:
 // Regex matching
 "/^[A-Z]/.test(name)"
 ```
+
+### Offset Positioning
+
+The new offset feature allows for fine-grained positioning relative to a reference file within the same priority group:
+
+```json
+{
+  "explorerSort.rules": [
+    {
+      "name": "Component Organization",
+      "pathPattern": "**/components/**",
+      "priorities": [
+        {
+          "condition": "name.endsWith('.tsx')",
+          "priority": 100,
+          "referenceFile": "index.tsx",
+          "offset": 0
+        },
+        {
+          "condition": "name.endsWith('.test.tsx')",
+          "priority": 100,
+          "referenceFile": "index.tsx",
+          "offset": -1
+        },
+        {
+          "condition": "name.endsWith('.stories.tsx')",
+          "priority": 100,
+          "referenceFile": "index.tsx",
+          "offset": -2
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Offset Values:**
+- `0`: Position **before** the reference file
+- `-1`: Position **immediately after** the reference file
+- `> 0`: Position **N positions before** the reference file
+- `< -1`: Position **N positions after** the reference file
+
+**Key Points:**
+1. **Priority First**: Offset only applies within the same priority group - **cannot cross priority boundaries**
+2. **Reference File Required**: Must specify an exact filename (with extension for files)
+3. **Sequential Application**: Multiple offset rules are applied in the order they appear
+4. **Automatic Fallback**: If reference file is not found, standard priority sorting applies
+5. **Boundary Protection**: Offset positioning is constrained within the same priority level to maintain hierarchy
 
 ## 🏗️ Project Structure
 
