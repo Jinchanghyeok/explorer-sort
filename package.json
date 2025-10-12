@@ -33,9 +33,7 @@
     "url": "https://github.com/Jinchanghyeok/explorer-sort/issues"
   },
   "homepage": "https://github.com/Jinchanghyeok/explorer-sort#readme",
-  "activationEvents": [
-    "onStartupFinished"
-  ],
+  "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "views": {

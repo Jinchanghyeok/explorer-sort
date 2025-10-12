@@ -4,9 +4,16 @@ src/**
 .gitignore
 .DS_Store
 tsconfig.json
-node_modules/**
 *.vsix
 **/*.map
 .git/**
 IMPLEMENTATION_CHECKLIST.md
 example-settings.json
+node_modules/**/test/**
+node_modules/**/tests/**
+node_modules/**/*.md
+node_modules/**/.editorconfig
+node_modules/**/.eslintrc*
+node_modules/**/.jshintrc
+node_modules/**/.npmignore
+node_modules/**/.travis.yml

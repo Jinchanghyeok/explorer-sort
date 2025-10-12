@@ -14,33 +14,42 @@ let cutDecorationProvider: CutFileDecorationProvider;
 
 export function activate(context: vscode.ExtensionContext) {
   console.log('🌍 VS Code Language:', vscode.env.language);
-  
+  console.log('✨ Explorer Sort extension is being activated');
+
   // 국제화 초기화
   I18n.init();
-  
+
   const workspaceFolders = vscode.workspace.workspaceFolders;
   if (!workspaceFolders) {
+    console.warn('⚠️ No workspace folder found - extension will not initialize tree view');
     vscode.window.showWarningMessage(I18n.t('messages.noWorkspace'));
+    // TreeView를 빈 상태로라도 등록하지 않으면 "등록된 데이터 공급자가 없다" 오류 발생
+    // 워크스페이스가 없을 때는 명령만 등록하고 TreeView는 등록하지 않음
     return;
   }
-  
+
   const workspaceRoot = workspaceFolders[0].uri.fsPath;
   const workspaceName = path.basename(workspaceRoot);
-  
+
+  console.log('�� Workspace root:', workspaceRoot);
+  console.log('📛 Workspace name:', workspaceName);
+
   const treeProvider = new FileTreeProvider(workspaceRoot);
   const dragDropController = new DragDropController(treeProvider);
-  
+
   cutDecorationProvider = new CutFileDecorationProvider();
   context.subscriptions.push(
     vscode.window.registerFileDecorationProvider(cutDecorationProvider)
   );
-  
+
   const treeView = vscode.window.createTreeView('explorerSort', {
     treeDataProvider: treeProvider,
     dragAndDropController: dragDropController,
     canSelectMany: false
   });
-  
+
+  console.log('✅ TreeView created successfully');
+
   treeView.title = `${workspaceName}_SORT`;
   
   // 모든 명령 등록
