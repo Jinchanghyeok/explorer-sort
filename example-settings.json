@@ -1,0 +1,18 @@
+{
+  "explorerSort.rules": [
+    {
+      "name": "FSD Structure",
+      "pathPattern": "**/src/**",
+      "priorities": [
+        { "condition": "name === 'app'", "priority": 1000 },
+        { "condition": "name === 'pages'", "priority": 999 },
+        { "condition": "name === 'widgets'", "priority": 998 },
+        { "condition": "name === 'features'", "priority": 997 },
+        { "condition": "name === 'entities'", "priority": 996 },
+        { "condition": "name === 'shared'", "priority": 995 }
+      ]
+    }
+  ],
+  "explorerSort.defaultSort": "name",
+  "explorerSort.showHiddenFiles": true
+}
