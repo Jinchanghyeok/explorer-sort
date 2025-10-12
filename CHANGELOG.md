@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2024-10-13
+
+### Fixed
+
+- **View Name Display**: Fixed the view name not displaying correctly in the Explorer sidebar
+  - Changed hardcoded `"EXPLORER_SORT"` to localized `"%views.explorerSort.name%"`
+  - Added proper translations in `package.nls.json` and `package.nls.ko.json`
+  - Resolves "No data provider registered" error on extension activation
+
 ## [0.1.0] - 2024-10-13
 
 ### Added
@@ -63,5 +72,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Condition expressions use regex-based parsing (limited to predefined patterns)
 - No automated tests yet (manual testing only)
 
-[unreleased]: https://github.com/Jinchanghyeok/explorer-sort/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/Jinchanghyeok/explorer-sort/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/Jinchanghyeok/explorer-sort/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Jinchanghyeok/explorer-sort/releases/tag/v0.1.0
