@@ -8,6 +8,9 @@
     "name": "Jin Chang",
     "email": "jinchang9807@gmail.com"
   },
+  "sponsor": {
+    "url": "https://github.com/sponsors/Jinchanghyeok"
+  },
   "license": "MIT",
   "icon": "image/icon.png",
   "engines": {

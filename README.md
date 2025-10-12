@@ -4,6 +4,7 @@ A powerful VS Code extension that allows you to sort files and folders with cust
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![Sponsor](https://img.shields.io/badge/Sponsor-💖-ff69b4)](https://github.com/sponsors/Jinchanghyeok)
 
 ## ✨ Features
 
@@ -372,9 +373,24 @@ SOFTWARE.
 - 📧 Email: jinchang9807@gmail.com
 - 🐛 Issues: [GitHub Issues](https://github.com/Jinchanghyeok/explorer-sort/issues)
 - 💬 Discussions: [GitHub Discussions](https://github.com/Jinchanghyeok/explorer-sort/discussions)
+- 💖 Sponsor: [GitHub Sponsors](https://github.com/sponsors/Jinchanghyeok)
 
 ---
 
 **Made with ❤️ for the VS Code community**
 
 If you find this extension helpful, please ⭐ star the repository!
+
+## 💖 Support This Project
+
+If this extension makes your development workflow better, consider supporting its development:
+
+[![Sponsor on GitHub](https://img.shields.io/badge/Sponsor-💖-ff69b4?style=for-the-badge&logo=github)](https://github.com/sponsors/Jinchanghyeok)
+
+Your sponsorship helps me:
+- 🚀 Continue developing and maintaining this extension
+- 🐛 Fix bugs and add new features faster
+- 📚 Create better documentation and tutorials
+- ☕ Stay caffeinated during late-night coding sessions
+
+Every contribution, no matter how small, is greatly appreciated! 🙏
