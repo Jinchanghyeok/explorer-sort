@@ -12,11 +12,14 @@ export class ConfigManager {
    */
   public static getConfig(): ExplorerSortConfig {
     const config = vscode.workspace.getConfiguration(this.CONFIG_SECTION);
-    
+
     return {
       rules: config.get<SortRule[]>('rules', []),
       defaultSort: config.get<'name' | 'type' | 'modified'>('defaultSort', 'name'),
-      showHiddenFiles: config.get<boolean>('showHiddenFiles', true)
+      showHiddenFiles: config.get<boolean>('showHiddenFiles', true),
+      excludePatterns: config.get<string[]>('excludePatterns', []),
+      respectGitignore: config.get<boolean>('respectGitignore', false),
+      respectVsCodeExclude: config.get<boolean>('respectVsCodeExclude', true)
     };
   }
   

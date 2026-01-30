@@ -10,6 +10,7 @@
   "commands.openToSide": "Open to the Side",
   "commands.openWith": "Open With...",
   "commands.revealInExplorer": "Reveal in Explorer",
+  "commands.findInFolder": "Find in Folder...",
   "commands.newFile": "New File",
   "commands.newFolder": "New Folder",
   "commands.rename": "Rename",
@@ -29,7 +30,8 @@
   "commands.moveUp": "Move Priority Up",
   "commands.moveDown": "Move Priority Down",
   "commands.setPriority": "Set Priority...",
-  
+  "commands.revealActiveFile": "Reveal Active File in Explorer Sort",
+
   "messages.noWorkspace": "No workspace is opened",
   "messages.refreshed": "File tree refreshed",
   "messages.fileCreated": "File created: {0}",
@@ -47,7 +49,11 @@
   "messages.sortRuleAdded": "Sort rule added: {0}",
   "messages.priorityUpdated": "Priority updated: {0}",
   "messages.noPrioritiesAdded": "No priorities added. Rule not created.",
-  
+  "messages.noActiveFile": "No active file to reveal",
+  "messages.fileNotInWorkspace": "Active file is not in current workspace",
+  "messages.fileNotFoundInTree": "File not found in Explorer Sort view",
+  "messages.revealFailed": "Failed to reveal file in Explorer Sort",
+
   "prompts.fileName": "File name",
   "prompts.folderName": "Folder name",
   "prompts.newName": "New name",
@@ -90,5 +96,8 @@
   
   "config.rules": "Sort rules configuration",
   "config.defaultSort": "Default sort method",
-  "config.showHiddenFiles": "Show hidden files"
+  "config.showHiddenFiles": "Show hidden files",
+  "config.excludePatterns": "Array of glob patterns for files/folders to exclude from the tree view",
+  "config.respectGitignore": "Automatically respect .gitignore rules when showing files",
+  "config.respectVsCodeExclude": "Respect VS Code's files.exclude settings"
 }

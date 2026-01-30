@@ -2,7 +2,7 @@
   "name": "explorer-sort",
   "displayName": "%extension.displayName%",
   "description": "%extension.description%",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "publisher": "jinchanghyeok",
   "author": {
     "name": "Jin Chang",
@@ -74,6 +74,10 @@
       {
         "command": "explorerSort.revealInExplorer",
         "title": "%commands.revealInExplorer%"
+      },
+      {
+        "command": "explorerSort.findInFolder",
+        "title": "%commands.findInFolder%"
       },
       {
         "command": "explorerSort.newFile",
@@ -156,6 +160,11 @@
         "command": "explorerSort.setPriority",
         "title": "%commands.setPriority%",
         "icon": "$(edit)"
+      },
+      {
+        "command": "explorerSort.revealActiveFile",
+        "title": "%commands.revealActiveFile%",
+        "icon": "$(location)"
       }
     ],
     "menus": {
@@ -206,6 +215,11 @@
           "command": "explorerSort.openInTerminal",
           "when": "view == explorerSort && viewItem == directory",
           "group": "0_open@4"
+        },
+        {
+          "command": "explorerSort.findInFolder",
+          "when": "view == explorerSort && viewItem == directory",
+          "group": "0_open@5"
         },
         {
           "command": "explorerSort.selectForCompare",
@@ -383,6 +397,13 @@
         "mac": "cmd+shift+p",
         "win": "ctrl+shift+p",
         "when": "focusedView == explorerSort"
+      },
+      {
+        "command": "explorerSort.revealActiveFile",
+        "key": "ctrl+cmd+e",
+        "mac": "ctrl+cmd+e",
+        "win": "ctrl+alt+e",
+        "when": "editorTextFocus"
       }
     ],
     "configuration": {
@@ -407,6 +428,27 @@
           "type": "boolean",
           "default": true,
           "description": "%config.showHiddenFiles%"
+        },
+        "explorerSort.excludePatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "%config.excludePatterns%",
+          "examples": [
+            ["node_modules", "dist", "build", ".git"]
+          ]
+        },
+        "explorerSort.respectGitignore": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.respectGitignore%"
+        },
+        "explorerSort.respectVsCodeExclude": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.respectVsCodeExclude%"
         }
       }
     }
@@ -423,6 +465,7 @@
     "typescript": "^5.3.0"
   },
   "dependencies": {
-    "micromatch": "^4.0.5"
+    "micromatch": "^4.0.5",
+    "ignore": "^5.3.1"
   }
 }

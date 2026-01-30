@@ -78,9 +78,18 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand('explorerSort.openWith', (item: FileTreeItem) => 
       vscode.commands.executeCommand('vscode.openWith', item.resourceUri)),
     
-    vscode.commands.registerCommand('explorerSort.revealInExplorer', (item: FileTreeItem) => 
+    vscode.commands.registerCommand('explorerSort.revealInExplorer', (item: FileTreeItem) =>
       vscode.commands.executeCommand('revealInExplorer', item.resourceUri)),
-    
+
+    vscode.commands.registerCommand('explorerSort.findInFolder', (item: FileTreeItem) => {
+      const folderPath = path.relative(workspaceRoot, item.resourceUri.fsPath);
+      vscode.commands.executeCommand('workbench.action.findInFiles', {
+        query: '',
+        triggerSearch: true,
+        filesToInclude: folderPath || '.'
+      });
+    }),
+
     vscode.commands.registerCommand('explorerSort.newFile', async (item?: FileTreeItem) => {
       const dir = item?.type === 'directory' ? item.resourceUri.fsPath : workspaceRoot;
       const name = await vscode.window.showInputBox({ prompt: I18n.t('prompts.fileName') });
@@ -438,6 +447,40 @@ export function activate(context: vscode.ExtensionContext) {
       await config.update('rules', rules, vscode.ConfigurationTarget.Workspace);
       treeProvider.refresh();
       vscode.window.showInformationMessage(I18n.t('messages.priorityUpdated', `${fileName}: ${newPriority}`));
+    }),
+
+    vscode.commands.registerCommand('explorerSort.revealActiveFile', async () => {
+      const activeEditor = vscode.window.activeTextEditor;
+
+      if (!activeEditor) {
+        vscode.window.showInformationMessage(I18n.t('messages.noActiveFile'));
+        return;
+      }
+
+      const filePath = activeEditor.document.uri.fsPath;
+
+      // 현재 워크스페이스에 속한 파일인지 확인
+      if (!filePath.startsWith(workspaceRoot)) {
+        vscode.window.showWarningMessage(I18n.t('messages.fileNotInWorkspace'));
+        return;
+      }
+
+      try {
+        const item = await treeProvider.findItemByPath(filePath);
+
+        if (item) {
+          await treeView.reveal(item, {
+            select: true,
+            focus: true,
+            expand: true
+          });
+        } else {
+          vscode.window.showWarningMessage(I18n.t('messages.fileNotFoundInTree'));
+        }
+      } catch (error) {
+        console.error('Failed to reveal file:', error);
+        vscode.window.showErrorMessage(I18n.t('messages.revealFailed'));
+      }
     })
   );
 }

@@ -4,6 +4,7 @@ import * as path from 'path';
 import { FileTreeItem, ExplorerSortConfig } from './types';
 import { SortEngine } from './sortEngine';
 import { ConfigManager } from './configManager';
+import { FilterEngine } from './filterEngine';
 
 /**
  * 파일 트리 데이터 프로바이더
@@ -11,17 +12,30 @@ import { ConfigManager } from './configManager';
 export class FileTreeProvider implements vscode.TreeDataProvider<FileTreeItem> {
   private _onDidChangeTreeData = new vscode.EventEmitter<FileTreeItem | undefined | null | void>();
   readonly onDidChangeTreeData = this._onDidChangeTreeData.event;
-  
+
   private workspaceRoot: string;
   private config: ExplorerSortConfig;
-  
+  private filterEngine: FilterEngine;
+
   constructor(workspaceRoot: string) {
     this.workspaceRoot = workspaceRoot;
     this.config = ConfigManager.getConfig();
-    
+
+    // FilterEngine 초기화
+    this.filterEngine = new FilterEngine(this.workspaceRoot, {
+      excludePatterns: this.config.excludePatterns,
+      respectGitignore: this.config.respectGitignore,
+      respectVsCodeExclude: this.config.respectVsCodeExclude
+    });
+
     // 설정 변경 감지
     ConfigManager.onConfigChange(() => {
       this.config = ConfigManager.getConfig();
+      this.filterEngine.updateConfig({
+        excludePatterns: this.config.excludePatterns,
+        respectGitignore: this.config.respectGitignore,
+        respectVsCodeExclude: this.config.respectVsCodeExclude
+      });
       this.refresh();
     });
     
@@ -84,14 +98,22 @@ export class FileTreeProvider implements vscode.TreeDataProvider<FileTreeItem> {
   private async readDirectory(dirPath: string): Promise<FileTreeItem[]> {
     const entries = fs.readdirSync(dirPath);
     const items: FileTreeItem[] = [];
-    
+
     for (const entry of entries) {
       // 숨김 파일 필터링
       if (!this.config.showHiddenFiles && entry.startsWith('.')) {
         continue;
       }
-      
+
       const fullPath = path.join(dirPath, entry);
+      const relativePath = path.relative(this.workspaceRoot, fullPath);
+
+      // 패턴 기반 필터링 (excludePatterns, .gitignore, VSCode 설정)
+      if (this.filterEngine.shouldExclude(relativePath, entry)) {
+        continue;
+      }
+
+      // 기존 fullPath 선언 제거 (위로 이동)
       const stat = fs.statSync(fullPath);
       const isDirectory = stat.isDirectory();
       
@@ -147,5 +169,31 @@ export class FileTreeProvider implements vscode.TreeDataProvider<FileTreeItem> {
       collapsibleState: vscode.TreeItemCollapsibleState.Collapsed,
       contextValue: 'directory'
     };
+  }
+
+  /**
+   * 경로로 TreeItem 찾기 (재귀 탐색)
+   */
+  public async findItemByPath(
+    targetPath: string,
+    parent?: FileTreeItem
+  ): Promise<FileTreeItem | null> {
+    const children = await this.getChildren(parent);
+
+    for (const child of children) {
+      // 정확히 일치하는 경우
+      if (child.resourceUri.fsPath === targetPath) {
+        return child;
+      }
+
+      // 타겟이 현재 자식의 하위 경로인 경우 재귀 탐색
+      if (child.type === 'directory' &&
+          targetPath.startsWith(child.resourceUri.fsPath + path.sep)) {
+        const found = await this.findItemByPath(targetPath, child);
+        if (found) return found;
+      }
+    }
+
+    return null;
   }
 }

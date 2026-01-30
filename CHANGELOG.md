@@ -7,6 +7,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.5] - 2026-01-30
+
+### Added
+
+- **Find in Folder**: Right-click on any folder to search for files within that folder
+  - Integrates with VS Code's native search panel
+  - Automatically filters search scope to the selected folder
+  - Accessible via context menu on directory items
+- **Reveal Active File Command**: New command to quickly locate the currently active file in the Explorer Sort view
+  - Keyboard shortcut: `Ctrl+Cmd+E` (Mac) / `Ctrl+Alt+E` (Windows/Linux)
+  - Automatically expands folders and selects the active file
+  - Shows helpful messages when no file is active or file is not in workspace
+  - Fully customizable keyboard binding
+- **Advanced File Filtering**: Powerful new filtering system to hide unwanted files and folders
+  - **`explorerSort.excludePatterns`**: Array of glob patterns to exclude files/folders (e.g., `["node_modules", "dist", ".env"]`)
+  - **`explorerSort.respectGitignore`**: Automatically respect `.gitignore` rules (default: `false`)
+  - **`explorerSort.respectVsCodeExclude`**: Respect VS Code's `files.exclude` settings (default: `true`)
+  - Supports complex glob patterns like `**/*.test.ts`, `**/build/**`
+  - Real-time updates when configuration changes
+
+### Improved
+
+- **Search Integration**: "Find in Folder" now opens search panel in ready-to-search state (previously required manual trigger)
+- **Pattern Matching**: Enhanced pattern matching using micromatch library for exclude patterns
+- **Configuration System**: Extended configuration interface to support new filtering options
+
+### Technical
+
+- Added `ignore` library (v5.3.1) for `.gitignore` parsing
+- Created new `FilterEngine` class for centralized filtering logic
+- Extended `ExplorerSortConfig` interface with filtering properties
+- Improved TypeScript type definitions for new features
+
+## [0.1.4] - 2025-01-30
+
+### Added
+
+- GitHub Sponsors support for project sustainability
+
+### Documentation
+
+- Updated README with GitHub Sponsors badge and support section
+- Added offset feature details and examples
+
 ## [0.1.2] - 2024-10-13
 
 ### Fixed
@@ -78,7 +122,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Condition expressions use regex-based parsing (limited to predefined patterns)
 - No automated tests yet (manual testing only)
 
-[unreleased]: https://github.com/Jinchanghyeok/explorer-sort/compare/v0.1.2...HEAD
+[unreleased]: https://github.com/Jinchanghyeok/explorer-sort/compare/v0.1.5...HEAD
+[0.1.5]: https://github.com/Jinchanghyeok/explorer-sort/compare/v0.1.4...v0.1.5
+[0.1.4]: https://github.com/Jinchanghyeok/explorer-sort/compare/v0.1.2...v0.1.4
 [0.1.2]: https://github.com/Jinchanghyeok/explorer-sort/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/Jinchanghyeok/explorer-sort/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Jinchanghyeok/explorer-sort/releases/tag/v0.1.0

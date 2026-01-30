@@ -16,6 +16,8 @@ A powerful VS Code extension that allows you to sort files and folders with cust
 - **Drag & Drop Reordering**: Intuitively reorder items by dragging and dropping
 - **Automatic Configuration**: Priority settings are automatically saved on drop
 - **Real-Time Sync**: Automatically detects and reflects file system changes
+- **Advanced File Filtering**: Hide unwanted files with glob patterns, gitignore rules, or VS Code settings
+- **Quick Navigation**: Find in folder and reveal active file commands for efficient browsing
 - **Internationalization**: Full support for Korean and English
 - **Visual Feedback**: Cut files are displayed in gray for better visibility
 - **Full File Operations**: Copy, cut, paste, rename, delete, duplicate, and more
@@ -116,17 +118,23 @@ Edit `.vscode/settings.json` in your workspace:
     }
   ],
   "explorerSort.defaultSort": "name",
-  "explorerSort.showHiddenFiles": true
+  "explorerSort.showHiddenFiles": true,
+  "explorerSort.excludePatterns": ["node_modules", "dist", ".env"],
+  "explorerSort.respectGitignore": false,
+  "explorerSort.respectVsCodeExclude": true
 }
 ```
 
 ## ⚙️ Configuration
 
-| Setting                          | Type    | Default    | Description                                 |
-| -------------------------------- | ------- | ---------- | ------------------------------------------- |
-| `explorerSort.rules`           | Array   | `[]`     | Array of sorting rules                      |
-| `explorerSort.defaultSort`     | String  | `"name"` | Default sorting method (name/type/modified) |
-| `explorerSort.showHiddenFiles` | Boolean | `true`   | Show hidden files                           |
+| Setting                              | Type    | Default  | Description                                            |
+| ------------------------------------ | ------- | -------- | ------------------------------------------------------ |
+| `explorerSort.rules`                 | Array   | `[]`     | Array of sorting rules                                 |
+| `explorerSort.defaultSort`           | String  | `"name"` | Default sorting method (name/type/modified)            |
+| `explorerSort.showHiddenFiles`       | Boolean | `true`   | Show hidden files (dot-prefixed)                       |
+| `explorerSort.excludePatterns`       | Array   | `[]`     | Glob patterns to exclude files/folders from tree view  |
+| `explorerSort.respectGitignore`      | Boolean | `false`  | Automatically respect .gitignore rules                 |
+| `explorerSort.respectVsCodeExclude`  | Boolean | `true`   | Respect VS Code's files.exclude settings               |
 
 ### Rule Structure
 
@@ -215,6 +223,73 @@ The new offset feature allows for fine-grained positioning relative to a referen
 4. **Automatic Fallback**: If reference file is not found, standard priority sorting applies
 5. **Boundary Protection**: Offset positioning is constrained within the same priority level to maintain hierarchy
 
+### Advanced File Filtering
+
+Control which files and folders appear in your Explorer Sort view:
+
+```json
+{
+  "explorerSort.excludePatterns": [
+    "node_modules",
+    "dist",
+    "build",
+    ".git",
+    "**/*.log",
+    "**/.DS_Store"
+  ],
+  "explorerSort.respectGitignore": true,
+  "explorerSort.respectVsCodeExclude": true
+}
+```
+
+**Filter Options:**
+
+- **`excludePatterns`**: Array of glob patterns to hide specific files/folders
+  - Supports exact names: `"node_modules"`, `".env"`
+  - Supports glob patterns: `"**/*.test.ts"`, `"**/build/**"`
+  - Case-sensitive matching
+- **`respectGitignore`**: When enabled, automatically hides files ignored by `.gitignore`
+  - Reads `.gitignore` from workspace root
+  - Updates automatically when `.gitignore` changes
+- **`respectVsCodeExclude`**: Integrates with VS Code's native `files.exclude` setting
+  - Honors your existing VS Code file exclusions
+  - Enabled by default for consistency
+
+**Example Use Cases:**
+
+```json
+// Hide build artifacts and dependencies
+{
+  "explorerSort.excludePatterns": ["dist", "node_modules", "coverage", "*.log"]
+}
+
+// Hide all test files
+{
+  "explorerSort.excludePatterns": ["**/*.test.ts", "**/*.spec.js"]
+}
+
+// Use gitignore for automatic exclusion
+{
+  "explorerSort.respectGitignore": true
+}
+```
+
+### Quick Navigation Commands
+
+#### Find in Folder
+
+- Right-click any folder to search for files within it
+- Opens VS Code's search panel with the folder pre-filtered
+- Useful for quickly finding files in large directories
+
+#### Reveal Active File
+
+Keyboard shortcut: `Ctrl+Cmd+E` (Mac) / `Ctrl+Alt+E` (Windows/Linux)
+
+- Instantly locate the currently open file in Explorer Sort view
+- Automatically expands parent folders and selects the file
+- Customizable keyboard shortcut via VS Code settings
+
 ## 🏗️ Project Structure
 
 ```
@@ -223,6 +298,7 @@ explorer-sort/
 │   ├── extension.ts              # Main entry point
 │   ├── fileTreeProvider.ts       # File tree data provider
 │   ├── sortEngine.ts             # Sorting logic engine
+│   ├── filterEngine.ts           # File filtering logic (NEW)
 │   ├── configManager.ts          # Configuration management
 │   ├── dragDropController.ts     # Drag & drop handling
 │   ├── cutDecorationProvider.ts  # Visual feedback for cut files
@@ -370,7 +446,8 @@ SOFTWARE.
 
 - Inspired by VS Code's native Explorer
 - Built with [VS Code Extension API](https://code.visualstudio.com/api)
-- Uses [micromatch](https://github.com/micromatch/micromatch) for pattern matching
+- Uses [micromatch](https://github.com/micromatch/micromatch) for glob pattern matching
+- Uses [ignore](https://github.com/kaelzhang/node-ignore) for `.gitignore` parsing
 
 ## 📞 Support
 

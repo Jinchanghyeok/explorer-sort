@@ -37,6 +37,9 @@ export interface ExplorerSortConfig {
   rules: SortRule[];
   defaultSort: 'name' | 'type' | 'modified';
   showHiddenFiles: boolean;
+  excludePatterns: string[];
+  respectGitignore: boolean;
+  respectVsCodeExclude: boolean;
 }
 
 /**
